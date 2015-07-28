@@ -1,10 +1,13 @@
 package com.example.yamauchi.uiyo;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -165,5 +168,36 @@ public class MainActivity extends AppCompatActivity
             tv.setText(view.getText());
         }
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuItem i0 = menu.add(0, 0, 0, "Add");
+        i0.setIcon(android.R.drawable.ic_menu_add);
+        i0.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+        MenuItem i1 = menu.add(0, 1, 0, "Delete");
+        i1.setIcon(android.R.drawable.ic_menu_delete);
+        i1.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        String text = "";
+        switch(id){
+            case 0: text = "Add"; break;
+            case 1: text = "Del"; break;
+            default: return false;
+        }
+
+        AlertDialog.Builder ad = new AlertDialog.Builder(this);
+        ad.setMessage(text);
+        ad.setPositiveButton("OK", null);
+        ad.show();
+
+        return true;
     }
 }
